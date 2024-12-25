@@ -21,5 +21,11 @@ jobs:
       - name: Install Bandit
         run: pip install bandit
 
-      - name: Run Bandit
-        run: bandit -r .
+      - name: Run Bandit and Generate HTML Report
+        run: bandit -r . -f html -o bandit_report.html
+
+      - name: Upload HTML Report
+        uses: actions/upload-artifact@v3
+        with:
+          name: bandit-security-report
+          path: bandit_report.html
