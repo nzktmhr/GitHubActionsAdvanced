@@ -12,8 +12,8 @@ def vulnerable_function(conn, user_input):
   cursor = conn.cursor()
   
   # 脆弱性: ユーザー入力を直接SQLクエリに含めている
-  query = f"SELECT * FROM users WHERE name = '{user_input}'"
-  cursor.execute(query)
+  query = "SELECT * FROM users WHERE name = ?"
+  cursor.execute(query, (user_input,))
 
   return cursor.fetchall()
 
